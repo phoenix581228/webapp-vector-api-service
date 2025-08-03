@@ -97,7 +97,7 @@ echo "4️⃣ 上傳圖片分析資料"
 echo "上傳測試檔案..."
 upload_response=$(curl -s -X POST \
     -F "file=@test_image_analysis.json" \
-    "$API_URL/api/v1/image-analyses")
+    "$API_URL/api/v1/image-analyses/")
 
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}✅ 上傳成功${NC}"
@@ -113,7 +113,7 @@ fi
 # 5. 列表測試
 echo ""
 echo "5️⃣ 列出所有分析資料"
-list_response=$(curl -s "$API_URL/api/v1/image-analyses")
+list_response=$(curl -s "$API_URL/api/v1/image-analyses/")
 echo "資料筆數: $(echo "$list_response" | jq '. | length' 2>/dev/null || echo "無法解析")"
 
 # 6. 取得單筆資料

@@ -2,7 +2,7 @@
 
 # 批次上傳 JSON 檔案腳本
 
-API_URL="http://localhost:8100/api/v1/image-analyses"
+API_URL="http://localhost:8100/api/v1/image-analyses/"
 
 echo "📤 批次上傳 JSON 檔案..."
 

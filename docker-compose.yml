@@ -41,7 +41,7 @@ services:
       PORT: 8000
       
       # CORS
-      CORS_ORIGINS: "*"
+      CORS_ORIGINS: '["*"]'
       
       # Vector Configuration
       VECTOR_DIMENSION: 1920
