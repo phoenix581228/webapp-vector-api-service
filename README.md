@@ -6,7 +6,9 @@
 
 - **API Framework**: FastAPI
 - **Database**: PostgreSQL with pgvector extension
-- **Embedding Service**: LM Studio with Qwen3-embedding-8b (1920 dimensions)
+- **Embedding Service**: LM Studio with Qwen3-embedding-8b
+  - 支援 MRL (Matryoshka Representation Learning)
+  - 預設使用 1920 維度（可動態調整）
 - **Container**: Docker & Docker Compose
 - **Language**: Python 3.11+
 
