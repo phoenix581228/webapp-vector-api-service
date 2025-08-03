@@ -1,0 +1,80 @@
+version: '3.8'
+
+services:
+  # PostgreSQL with pgvector
+  postgres:
+    image: pgvector/pgvector:pg15
+    container_name: webapp-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: webapp
+      POSTGRES_PASSWORD: webapp_secure_password_2024
+      POSTGRES_DB: webapp_vectors
+    ports:
+      - "5434:5432"  # 使用不同端口避免衝突
+    volumes:
+      - webapp_postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U webapp"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - webapp-network
+
+  # FastAPI Application
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: webapp-api
+    restart: unless-stopped
+    environment:
+      # Database
+      DATABASE_URL: postgresql://webapp:webapp_secure_password_2024@postgres:5432/webapp_vectors
+      
+      # Application
+      ENVIRONMENT: production
+      DEBUG: "false"
+      HOST: 0.0.0.0
+      PORT: 8000
+      
+      # CORS
+      CORS_ORIGINS: "*"
+      
+      # Vector Configuration
+      VECTOR_DIMENSION: 1920
+      VECTOR_INDEX_TYPE: hnsw
+      VECTOR_DISTANCE_METRIC: cosine
+      
+      # Embedding Service (LM Studio)
+      EMBEDDING_PROVIDER: lmstudio
+      LM_STUDIO_URL: http://host.docker.internal:1234/v1
+      LM_STUDIO_EMBEDDING_MODEL: text-embedding-qwen3-embedding-8b
+      LM_STUDIO_API_KEY: lm-studio
+      
+      # Logging
+      LOG_LEVEL: INFO
+      LOG_FORMAT: json
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./logs:/app/logs
+    depends_on:
+      - postgres
+    networks:
+      - webapp-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  webapp-network:
+    driver: bridge
+
+volumes:
+  webapp_postgres_data:
+    driver: local
