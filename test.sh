@@ -3,7 +3,7 @@
 # WebApp Vector API 測試腳本
 set -e
 
-API_URL="http://localhost:8000"
+API_URL="http://localhost:8100"
 
 echo "🧪 WebApp Vector API 測試開始..."
 
@@ -162,5 +162,5 @@ echo ""
 echo "✅ 測試完成！"
 echo ""
 echo "📝 提示："
-echo "  - 查看 API 文檔: http://localhost:8000/docs"
+echo "  - 查看 API 文檔: http://localhost:8100/docs"
 echo "  - 查看服務日誌: docker-compose logs -f"

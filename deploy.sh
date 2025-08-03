@@ -75,7 +75,7 @@ wait_for_services() {
     # 等待 API
     echo -n "等待 API 服務..."
     for i in {1..30}; do
-        if curl -s http://localhost:8000/health > /dev/null; then
+        if curl -s http://localhost:8100/health > /dev/null; then
             echo " ✅"
             break
         fi
@@ -91,8 +91,8 @@ show_status() {
     docker-compose ps
     echo ""
     echo "🌐 服務端點："
-    echo "  - API: http://localhost:8000"
-    echo "  - API 文檔: http://localhost:8000/docs"
+    echo "  - API: http://localhost:8100"
+    echo "  - API 文檔: http://localhost:8100/docs"
     echo "  - PostgreSQL: localhost:5434"
     echo ""
 }

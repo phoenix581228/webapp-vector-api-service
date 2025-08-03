@@ -23,9 +23,9 @@
 
 ### 3. 服務端點
 
-- **API 主服務**: http://localhost:8000
-- **Swagger UI**: http://localhost:8000/docs
-- **ReDoc**: http://localhost:8000/redoc
+- **API 主服務**: http://localhost:8100
+- **Swagger UI**: http://localhost:8100/docs
+- **ReDoc**: http://localhost:8100/redoc
 - **PostgreSQL**: localhost:5434
 
 ## 環境設定
@@ -53,7 +53,7 @@ VECTOR_DIMENSION=1920
 ```bash
 curl -X POST \
   -F "file=@your_analysis.json" \
-  http://localhost:8000/api/v1/image-analyses
+  http://localhost:8100/api/v1/image-analyses
 ```
 
 ### 搜尋相似內容
@@ -62,7 +62,7 @@ curl -X POST \
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{"caption_query": "搜尋文字", "limit": 10}' \
-  http://localhost:8000/api/v1/image-analyses/search
+  http://localhost:8100/api/v1/image-analyses/search
 ```
 
 ### 標籤搜尋
@@ -71,7 +71,7 @@ curl -X POST \
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{"tags": ["標籤1", "標籤2"], "limit": 10}' \
-  http://localhost:8000/api/v1/image-analyses/search
+  http://localhost:8100/api/v1/image-analyses/search
 ```
 
 ## 管理命令

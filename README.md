@@ -48,10 +48,10 @@
 docker-compose up -d
 
 # 檢查服務狀態
-curl http://localhost:8000/health
+curl http://localhost:8100/health
 
 # 查看 API 文檔
-open http://localhost:8000/docs
+open http://localhost:8100/docs
 ```
 
 ## 環境需求

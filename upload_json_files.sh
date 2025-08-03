@@ -2,7 +2,7 @@
 
 # 批次上傳 JSON 檔案腳本
 
-API_URL="http://localhost:8000/api/v1/image-analyses"
+API_URL="http://localhost:8100/api/v1/image-analyses"
 
 echo "📤 批次上傳 JSON 檔案..."
 
@@ -108,5 +108,5 @@ if [ $success -gt 0 ]; then
     echo "📝 下一步："
     echo "  - 查看所有資料: curl $API_URL | jq"
     echo "  - 搜尋測試: ./test.sh"
-    echo "  - API 文檔: http://localhost:8000/docs"
+    echo "  - API 文檔: http://localhost:8100/docs"
 fi

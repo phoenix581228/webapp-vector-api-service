@@ -58,7 +58,7 @@ services:
       LOG_LEVEL: INFO
       LOG_FORMAT: json
     ports:
-      - "8000:8000"
+      - "8100:8000"
     volumes:
       - ./logs:/app/logs
     depends_on:
