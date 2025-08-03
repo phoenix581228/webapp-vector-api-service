@@ -4,7 +4,7 @@ from contextlib import asynccontextmanager
 import structlog
 
 from app.core.config import settings
-from app.api import health, documents, search
+from app.api import health, image_analyses
 from app.core.database import engine, Base
 
 # Configure structured logging
@@ -60,8 +60,7 @@ app.add_middleware(
 
 # Include routers
 app.include_router(health.router, tags=["health"])
-app.include_router(documents.router, prefix="/api/v1/documents", tags=["documents"])
-app.include_router(search.router, prefix="/api/v1/search", tags=["search"])
+app.include_router(image_analyses.router, prefix="/api/v1/image-analyses", tags=["image-analyses"])
 
 @app.get("/")
 async def root():

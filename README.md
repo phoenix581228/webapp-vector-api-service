@@ -1,6 +1,6 @@
 # WebApp Vector API Service
 
-一個專門為 Web 應用程式提供向量資料庫服務的 API，基於 FastAPI + PostgreSQL + pgvector + LM Studio 架構。
+一個專門為 Web 應用程式提供向量資料庫服務的 API，基於 FastAPI + PostgreSQL + pgvector + LM Studio 架構。專門設計用於儲存和搜尋圖片分析 JSON 資料。
 
 ## 技術架構
 
@@ -12,28 +12,34 @@
 
 ## 主要功能
 
-1. **向量嵌入管理**
-   - 文本轉換為向量嵌入
-   - 向量存儲和索引
-   - 相似度搜尋
+1. **圖片分析資料管理**
+   - 儲存圖片分析 JSON 資料
+   - 自動擷取結構化欄位
+   - 保留完整 JSON 資料供查詢
 
-2. **RESTful API**
-   - 標準 REST 端點
-   - OpenAPI 文檔
-   - 認證和授權
+2. **向量嵌入搜尋**
+   - 圖片描述文字轉換為向量嵌入 (1920維度)
+   - 相似度搜尋功能
+   - 支援標籤搜尋
 
-3. **資料管理**
-   - CRUD 操作
-   - 批次處理
-   - 資料匯入/匯出
+3. **PostgreSQL JSONB 支援**
+   - 原生 JSONB 資料類型
+   - GIN 索引加速 JSON 查詢
+   - 彈性的資料結構
 
 ## API 端點
 
-- `POST /embeddings` - 創建新的嵌入
-- `GET /search` - 向量相似度搜尋
-- `GET /documents/{id}` - 取得文檔
-- `PUT /documents/{id}` - 更新文檔
-- `DELETE /documents/{id}` - 刪除文檔
+### 圖片分析資料
+- `POST /api/v1/image-analyses` - 上傳圖片分析 JSON 檔案
+- `GET /api/v1/image-analyses/{id}` - 取得特定分析資料
+- `GET /api/v1/image-analyses` - 列出所有分析資料
+- `POST /api/v1/image-analyses/search` - 搜尋分析資料（文字相似度或標籤）
+
+### 系統狀態
+- `GET /health` - 健康檢查
+- `GET /` - API 資訊
+- `GET /docs` - Swagger UI 文檔
+- `GET /redoc` - ReDoc 文檔
 
 ## 快速開始
 
